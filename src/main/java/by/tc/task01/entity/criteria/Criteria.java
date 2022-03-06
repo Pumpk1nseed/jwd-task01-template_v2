@@ -19,7 +19,8 @@ public class Criteria {
 	public void add(String searchCriteria, Object value) {
 		criteria.put(searchCriteria, value);
 	}
-	
-	// you may add your own code here
 
+	public Map<String, Object> getCriteria(){
+		return criteria;
+	}
 }

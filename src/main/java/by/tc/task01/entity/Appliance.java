@@ -1,5 +1,10 @@
 package by.tc.task01.entity;
 
+import java.util.Map;
+
 public class Appliance {
-	// you may add your own code here
+    public String get(String parameter){
+        return null;
+    }
+
 }
