@@ -7,34 +7,37 @@ import by.tc.task01.entity.criteria.Criteria;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.List;
+import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.Map;
 
 public class ApplianceDAOImpl implements ApplianceDAO {
-
+    private List<Appliance> appliances = readAppliancesFromDb();
 
     @Override
     public List<Appliance> find(Criteria criteria) {
-        List<Appliance> appliances = readAppliancesFromDb();
+
+        List<Appliance> result = new ArrayList<>();
 
         for (Appliance appliance : appliances) {
             if (appliance.getClass().getSimpleName().equals(criteria.getGroupSearchName())) {
+                boolean flag = true;
                 for (Map.Entry<String, Object> entry : criteria.getCriteria().entrySet()) {
                     if (appliance.get(entry.getKey()).equals(entry.getValue().toString().toLowerCase())) {
                     } else {
-                        appliances.remove(appliance);
+                        flag = false;
                     }
                 }
-            } else {
-                appliances.remove(appliance);
+                if (flag) {
+                    result.add(appliance);
+                }
             }
         }
-        return appliances;
+        return result;
     }
 
     public List<Appliance> readAppliancesFromDb() {
-        List<Appliance> appliances = new CopyOnWriteArrayList<>();
+        List<Appliance> appliances = new ArrayList<>();
 
         try {
             FileReader fileReader = new FileReader("src/main/resources/appliances_db.txt");
