@@ -23,8 +23,7 @@ public class ApplianceDAOImpl implements ApplianceDAO {
             if (appliance.getClass().getSimpleName().equals(criteria.getGroupSearchName())) {
                 boolean flag = true;
                 for (Map.Entry<String, Object> entry : criteria.getCriteria().entrySet()) {
-                    if (appliance.get(entry.getKey()).equals(entry.getValue().toString().toLowerCase())) {
-                    } else {
+                    if (!appliance.get(entry.getKey()).equals(entry.getValue().toString().toLowerCase())) {
                         flag = false;
                     }
                 }
