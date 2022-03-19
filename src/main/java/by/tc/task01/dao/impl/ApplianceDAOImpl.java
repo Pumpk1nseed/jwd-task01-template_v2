@@ -6,60 +6,47 @@ import by.tc.task01.entity.criteria.Criteria;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Scanner;
-import java.util.Map;
+import java.util.*;
 
+//олицетворить переменные
 public class ApplianceDAOImpl implements ApplianceDAO {
-    private List<Appliance> appliances = readAppliancesFromDb();
 
     @Override
     public List<Appliance> find(Criteria criteria) {
-
-        List<Appliance> result = new ArrayList<>();
-
-        for (Appliance appliance : appliances) {
-            if (appliance.getClass().getSimpleName().equals(criteria.getGroupSearchName())) {
-                boolean flag = true;
-                for (Map.Entry<String, Object> entry : criteria.getCriteria().entrySet()) {
-                    if (!appliance.get(entry.getKey()).equals(entry.getValue().toString().toLowerCase())) {
-                        flag = false;
-                    }
-                }
-                if (flag) {
-                    result.add(appliance);
-                }
-            }
-        }
-        return result;
-    }
-
-    public List<Appliance> readAppliancesFromDb() {
-        List<Appliance> appliances = new ArrayList<>();
+        List<Appliance> applianceFound = new ArrayList<>();
+        String applianceDbFile = Objects.requireNonNull(getClass().getClassLoader().getResource("appliances_db.txt").getPath());
 
         try {
-            FileReader fileReader = new FileReader("src/main/resources/appliances_db.txt");
+            FileReader fileReader = new FileReader(applianceDbFile);
             Scanner scanner = new Scanner(fileReader);
 
-            String line;
-            String applianceName;
-
             while (scanner.hasNextLine()) {
-                line = scanner.nextLine();
-                if (!line.isEmpty()) {
-                    applianceName = line.split(" :")[0];
-                    appliances.add(createAppliance(line, applianceName));
+                String applianceInfo = scanner.nextLine();
+
+                if (!applianceInfo.isEmpty()) {
+                    if (applianceInfo.split(" :")[0].equals(criteria.getGroupSearchName())) {
+                        boolean flag = true;
+                        for (Map.Entry<String, Object> criteriaParameters : criteria.getCriteria().entrySet()) {
+                            if (!applianceInfo.matches(".+" + criteriaParameters.getKey()
+                                    + "=" + criteriaParameters.getValue().toString().toLowerCase() + ".[^\\.]+")) {
+                                flag = false;
+                            }
+                        }
+                        if (flag) {
+                            applianceFound.add(createAppliance(applianceInfo, criteria.getGroupSearchName()));
+                        }
+                    }
                 }
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-        return appliances;
+        return applianceFound;
     }
 
-    public Appliance createAppliance(String line, String applianceName) {
-        String[] parameters = getParameters(line);
+    //реализовать через Builder
+    public Appliance createAppliance(String applianceInfo, String applianceName) {
+        String[] parameters = getApplianceParameters(applianceInfo);
 
         switch (applianceName) {
             case "Oven":
@@ -79,21 +66,22 @@ public class ApplianceDAOImpl implements ApplianceDAO {
         }
     }
 
-    public String[] getParameters(String line) {
-        char[] charLine = line.toCharArray();
+    public String[] getApplianceParameters(String applianceInfo) {
+        char[] charApplianceInfo = applianceInfo.toCharArray();
         StringBuilder builder = new StringBuilder();
 
-        for (int i = 0; i < charLine.length; i++) {
-            if (charLine[i] == '=') {
-                while (charLine[i] != ',' && i < charLine.length - 1) {
+        for (int i = 0; i < charApplianceInfo.length; i++) {
+            if (charApplianceInfo[i] == '=') {
+                while (charApplianceInfo[i] != ',' && i < charApplianceInfo.length - 1) {
                     i++;
-                    builder.append(charLine[i]);
+                    if (charApplianceInfo[i] != ';') {
+                        builder.append(charApplianceInfo[i]);
+                    }
                 }
             }
         }
-        String[] str = builder.toString().split(",");
-        return str;
+        String[] applianceParameters = builder.toString().split(",");
+        return applianceParameters;
     }
 
 }
-// you may add your own code here

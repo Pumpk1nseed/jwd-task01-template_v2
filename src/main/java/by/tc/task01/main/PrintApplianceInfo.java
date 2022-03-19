@@ -11,7 +11,7 @@ public class PrintApplianceInfo {
 				System.out.println(appliance);
 			}
 		} else {
-			System.out.println("Result isn't found!");
+			System.out.println("Result not found!");
 		}
 		
 	}
