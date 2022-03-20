@@ -1,14 +1,20 @@
 package by.tc.task01.entity;
 
-public class Refrigerator extends Appliance{
-    String powerConsumption;
-    String weight;
-    String freezerCapacity;
-    String overalCapacity;
-    String height;
-    String width;
+import java.util.Objects;
 
-    public Refrigerator(String powerConsumption, String weight, String freezerCapacity, String overalCapacity, String height, String width) {
+public class Refrigerator implements Appliance {
+    int powerConsumption;
+    int weight;
+    int freezerCapacity;
+    double overalCapacity;
+    double height;
+    double width;
+
+    public Refrigerator() {
+
+    }
+
+    public Refrigerator(int powerConsumption, int weight, int freezerCapacity, double overalCapacity, double height, double width) {
         this.powerConsumption = powerConsumption;
         this.weight = weight;
         this.freezerCapacity = freezerCapacity;
@@ -17,77 +23,33 @@ public class Refrigerator extends Appliance{
         this.width = width;
     }
 
-    @Override
-    public String get(String parameter) {
-        switch (parameter) {
-            case "POWER_CONSUMPTION":
-                return getPowerConsumption();
-            case "WEIGHT":
-                return getWeight();
-            case "FREEZER_CAPACITY":
-                return getFreezerCapacity();
-            case "OVERALL_CAPACITY":
-                return getOveralCapacity();
-            case "HEIGHT":
-                return getHeight();
-            case "WIDTH":
-                return getWidth();
-            default:
-                return null;
-        }
-    }
-
-    public String getPowerConsumption() {
-        return powerConsumption;
-    }
-
-    public void setPowerConsumption(String powerConsumption) {
+    public void setPowerConsumption(int powerConsumption) {
         this.powerConsumption = powerConsumption;
     }
 
-    public String getWeight() {
-        return weight;
-    }
-
-    public void setWeight(String weight) {
+    public void setWeight(int weight) {
         this.weight = weight;
     }
 
-    public String getFreezerCapacity() {
-        return freezerCapacity;
-    }
-
-    public void setFreezerCapacity(String freezerCapacity) {
+    public void setFreezerCapacity(int freezerCapacity) {
         this.freezerCapacity = freezerCapacity;
     }
 
-    public String getOveralCapacity() {
-        return overalCapacity;
-    }
-
-    public void setOveralCapacity(String overalCapacity) {
+    public void setOveralCapacity(double overalCapacity) {
         this.overalCapacity = overalCapacity;
     }
 
-    public String getHeight() {
-        return height;
-    }
-
-    public void setHeight(String height) {
+    public void setHeight(double height) {
         this.height = height;
     }
 
-    public String getWidth() {
-        return width;
-    }
-
-    public void setWidth(String width) {
+    public void setWidth(double width) {
         this.width = width;
     }
 
     @Override
     public String toString() {
-        return "Refrigerator{" +
+        return getClass().getSimpleName() + "{" +
                 "powerConsumption='" + powerConsumption + '\'' +
                 ", weight='" + weight + '\'' +
                 ", freezerCapacity='" + freezerCapacity + '\'' +
@@ -95,5 +57,18 @@ public class Refrigerator extends Appliance{
                 ", height='" + height + '\'' +
                 ", width='" + width + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Refrigerator that = (Refrigerator) o;
+        return powerConsumption == that.powerConsumption && weight == that.weight && freezerCapacity == that.freezerCapacity && Double.compare(that.overalCapacity, overalCapacity) == 0 && Double.compare(that.height, height) == 0 && Double.compare(that.width, width) == 0;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(powerConsumption, weight, freezerCapacity, overalCapacity, height, width);
     }
 }

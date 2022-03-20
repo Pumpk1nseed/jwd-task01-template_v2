@@ -1,13 +1,19 @@
 package by.tc.task01.entity;
 
-public class TabletPC extends Appliance {
-    String batteryCapacity;
-    String displayInches;
-    String memoryRom;
-    String flashMemoryCapacity;
+import java.util.Objects;
+
+public class TabletPC implements Appliance {
+    int batteryCapacity;
+    int displayInches;
+    int memoryRom;
+    int flashMemoryCapacity;
     String color;
 
-    public TabletPC(String batteryCapacity, String displayInches, String memoryRom, String flashMemoryCapacity, String color) {
+    public TabletPC() {
+
+    }
+
+    public TabletPC(int batteryCapacity, int displayInches, int memoryRom, int flashMemoryCapacity, String color) {
         this.batteryCapacity = batteryCapacity;
         this.displayInches = displayInches;
         this.memoryRom = memoryRom;
@@ -15,58 +21,20 @@ public class TabletPC extends Appliance {
         this.color = color;
     }
 
-    @Override
-    public String get(String parameter) {
-        switch (parameter) {
-            case "BATTERY_CAPACITY":
-                return getBatteryCapacity();
-            case "DISPLAY_INCHES":
-                return getDisplayInches();
-            case "MEMORY_ROM":
-                return getMemoryRom();
-            case "FLASH_MEMORY_CAPACITY":
-                return getFlashMemoryCapacity();
-            case "COLOR":
-                return getColor();
-            default:
-                return null;
-        }
-    }
-
-    public String getBatteryCapacity() {
-        return batteryCapacity;
-    }
-
-    public void setBatteryCapacity(String batteryCapacity) {
+    public void setBatteryCapacity(int batteryCapacity) {
         this.batteryCapacity = batteryCapacity;
     }
 
-    public String getDisplayInches() {
-        return displayInches;
-    }
-
-    public void setDisplayInches(String displayInches) {
+    public void setDisplayInches(int displayInches) {
         this.displayInches = displayInches;
     }
 
-    public String getMemoryRom() {
-        return memoryRom;
-    }
-
-    public void setMemoryRom(String memoryRom) {
+    public void setMemoryRom(int memoryRom) {
         this.memoryRom = memoryRom;
     }
 
-    public String getFlashMemoryCapacity() {
-        return flashMemoryCapacity;
-    }
-
-    public void setFlashMemoryCapacity(String flashMemoryCapacity) {
+    public void setFlashMemoryCapacity(int flashMemoryCapacity) {
         this.flashMemoryCapacity = flashMemoryCapacity;
-    }
-
-    public String getColor() {
-        return color;
     }
 
     public void setColor(String color) {
@@ -75,12 +43,25 @@ public class TabletPC extends Appliance {
 
     @Override
     public String toString() {
-        return "TabletPC{" +
+        return getClass().getSimpleName() + "{" +
                 "batteryCapacity='" + batteryCapacity + '\'' +
                 ", displayInches='" + displayInches + '\'' +
                 ", memoryRom='" + memoryRom + '\'' +
                 ", flashMemoryCapacity='" + flashMemoryCapacity + '\'' +
                 ", color='" + color + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        TabletPC tabletPC = (TabletPC) o;
+        return batteryCapacity == tabletPC.batteryCapacity && displayInches == tabletPC.displayInches && memoryRom == tabletPC.memoryRom && flashMemoryCapacity == tabletPC.flashMemoryCapacity && color.equals(tabletPC.color);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(batteryCapacity, displayInches, memoryRom, flashMemoryCapacity, color);
     }
 }

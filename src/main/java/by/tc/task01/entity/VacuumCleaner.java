@@ -1,14 +1,20 @@
 package by.tc.task01.entity;
 
-public class VacuumCleaner extends Appliance {
-    String powerConsumption;
+import java.util.Objects;
+
+public class VacuumCleaner implements Appliance {
+    int powerConsumption;
     String filterType;
     String bagType;
     String wandType;
-    String motorSpeedRegulation;
-    String cleaningWidth;
+    int motorSpeedRegulation;
+    int cleaningWidth;
 
-    public VacuumCleaner(String powerConsumption, String filterType, String bagType, String wandType, String motorSpeedRegulation, String cleaningWidth) {
+    public VacuumCleaner() {
+
+    }
+
+    public VacuumCleaner(int powerConsumption, String filterType, String bagType, String wandType, int motorSpeedRegulation, int cleaningWidth) {
         this.powerConsumption = powerConsumption;
         this.filterType = filterType;
         this.bagType = bagType;
@@ -17,77 +23,33 @@ public class VacuumCleaner extends Appliance {
         this.cleaningWidth = cleaningWidth;
     }
 
-    @Override
-    public String get(String parameter) {
-        switch (parameter) {
-            case "POWER_CONSUMPTION":
-                return getPowerConsumption();
-            case "FILTER_TYPE":
-                return getFilterType();
-            case "BAG_TYPE":
-                return getBagType();
-            case "WAND_TYPE":
-                return getWandType();
-            case "MOTOR_SPEED_REGULATION":
-                return getMotorSpeedRegulation();
-            case "CLEANING_WIDTH":
-                return getCleaningWidth();
-            default:
-                return null;
-        }
-    }
-
-    public String getPowerConsumption() {
-        return powerConsumption;
-    }
-
-    public void setPowerConsumption(String powerConsumption) {
+    public void setPowerConsumption(int powerConsumption) {
         this.powerConsumption = powerConsumption;
-    }
-
-    public String getFilterType() {
-        return filterType;
     }
 
     public void setFilterType(String filterType) {
         this.filterType = filterType;
     }
 
-    public String getBagType() {
-        return bagType;
-    }
-
     public void setBagType(String bagType) {
         this.bagType = bagType;
-    }
-
-    public String getWandType() {
-        return wandType;
     }
 
     public void setWandType(String wandType) {
         this.wandType = wandType;
     }
 
-    public String getMotorSpeedRegulation() {
-        return motorSpeedRegulation;
-    }
-
-    public void setMotorSpeedRegulation(String motorSpeedRegulation) {
+    public void setMotorSpeedRegulation(int motorSpeedRegulation) {
         this.motorSpeedRegulation = motorSpeedRegulation;
     }
 
-    public String getCleaningWidth() {
-        return cleaningWidth;
-    }
-
-    public void setCleaningWidth(String cleaningWidth) {
+    public void setCleaningWidth(int cleaningWidth) {
         this.cleaningWidth = cleaningWidth;
     }
 
     @Override
     public String toString() {
-        return "VacuumCleaner{" +
+        return getClass().getSimpleName() + "{" +
                 "powerConsumption='" + powerConsumption + '\'' +
                 ", filterType='" + filterType + '\'' +
                 ", bagType='" + bagType + '\'' +
@@ -95,5 +57,18 @@ public class VacuumCleaner extends Appliance {
                 ", motorSpeedRegulation='" + motorSpeedRegulation + '\'' +
                 ", cleaningWidth='" + cleaningWidth + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        VacuumCleaner that = (VacuumCleaner) o;
+        return powerConsumption == that.powerConsumption && motorSpeedRegulation == that.motorSpeedRegulation && cleaningWidth == that.cleaningWidth && filterType.equals(that.filterType) && bagType.equals(that.bagType) && wandType.equals(that.wandType);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(powerConsumption, filterType, bagType, wandType, motorSpeedRegulation, cleaningWidth);
     }
 }

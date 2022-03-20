@@ -1,14 +1,19 @@
 package by.tc.task01.entity;
 
-public class Laptop extends Appliance{
-    String batteryCapacity;
-    String os;
-    String memoryRom;
-    String systemMemory;
-    String cpu;
-    String displayInchs;
+import java.util.Objects;
 
-    public Laptop(String batteryCapacity, String os, String memoryRom, String systemMemory, String cpu, String displayInchs) {
+public class Laptop implements Appliance {
+    double batteryCapacity;
+    String os;
+    int memoryRom;
+    int systemMemory;
+    double cpu;
+    int displayInchs;
+
+    public Laptop() {
+    }
+
+    public Laptop(double batteryCapacity, String os, int memoryRom, int systemMemory, double cpu, int displayInchs) {
         this.batteryCapacity = batteryCapacity;
         this.os = os;
         this.memoryRom = memoryRom;
@@ -17,77 +22,33 @@ public class Laptop extends Appliance{
         this.displayInchs = displayInchs;
     }
 
-    @Override
-    public String get(String parameter) {
-        switch (parameter) {
-            case "BATTERY_CAPACITY":
-                return getBatteryCapacity();
-            case "OS":
-                return getOs();
-            case "MEMORY_ROM":
-                return getMemoryRom();
-            case "SYSTEM_MEMORY":
-                return getSystemMemory();
-            case "CPU":
-                return getCpu();
-            case "DISPLAY_INCHS":
-                return getDisplayInchs();
-            default:
-                return null;
-        }
-    }
-
-    public String getBatteryCapacity() {
-        return batteryCapacity;
-    }
-
-    public void setBatteryCapacity(String batteryCapacity) {
+    public void setBatteryCapacity(double batteryCapacity) {
         this.batteryCapacity = batteryCapacity;
-    }
-
-    public String getOs() {
-        return os;
     }
 
     public void setOs(String os) {
         this.os = os;
     }
 
-    public String getMemoryRom() {
-        return memoryRom;
-    }
-
-    public void setMemoryRom(String memoryRom) {
+    public void setMemoryRom(int memoryRom) {
         this.memoryRom = memoryRom;
     }
 
-    public String getSystemMemory() {
-        return systemMemory;
-    }
-
-    public void setSystemMemory(String systemMemory) {
+    public void setSystemMemory(int systemMemory) {
         this.systemMemory = systemMemory;
     }
 
-    public String getCpu() {
-        return cpu;
-    }
-
-    public void setCpu(String cpu) {
+    public void setCpu(double cpu) {
         this.cpu = cpu;
     }
 
-    public String getDisplayInchs() {
-        return displayInchs;
-    }
-
-    public void setDisplayInchs(String displayInchs) {
+    public void setDisplayInchs(int displayInchs) {
         this.displayInchs = displayInchs;
     }
 
     @Override
     public String toString() {
-        return "Laptop{" +
+        return getClass().getSimpleName() + "{" +
                 "batteryCapacity='" + batteryCapacity + '\'' +
                 ", os='" + os + '\'' +
                 ", memoryRom='" + memoryRom + '\'' +
@@ -95,5 +56,18 @@ public class Laptop extends Appliance{
                 ", cpu='" + cpu + '\'' +
                 ", displayInchs='" + displayInchs + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Laptop laptop = (Laptop) o;
+        return Double.compare(laptop.batteryCapacity, batteryCapacity) == 0 && memoryRom == laptop.memoryRom && systemMemory == laptop.systemMemory && Double.compare(laptop.cpu, cpu) == 0 && displayInchs == laptop.displayInchs && os.equals(laptop.os);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(batteryCapacity, os, memoryRom, systemMemory, cpu, displayInchs);
     }
 }

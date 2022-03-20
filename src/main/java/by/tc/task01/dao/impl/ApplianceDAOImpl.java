@@ -1,6 +1,7 @@
 package by.tc.task01.dao.impl;
 
 import by.tc.task01.dao.ApplianceDAO;
+import by.tc.task01.dao.impl.Builder.*;
 import by.tc.task01.entity.*;
 import by.tc.task01.entity.criteria.Criteria;
 
@@ -25,14 +26,14 @@ public class ApplianceDAOImpl implements ApplianceDAO {
 
                 if (!applianceInfo.isEmpty()) {
                     if (applianceInfo.split(" :")[0].equals(criteria.getGroupSearchName())) {
-                        boolean flag = true;
+                        boolean found = true;
                         for (Map.Entry<String, Object> criteriaParameters : criteria.getCriteria().entrySet()) {
                             if (!applianceInfo.matches(".+" + criteriaParameters.getKey()
-                                    + "=" + criteriaParameters.getValue().toString().toLowerCase() + ".[^\\.]+")) {
-                                flag = false;
+                                    + "=" + criteriaParameters.getValue().toString() + "(|([,;\\s].*))")) {
+                                found = false;
                             }
                         }
-                        if (flag) {
+                        if (found) {
                             applianceFound.add(createAppliance(applianceInfo, criteria.getGroupSearchName()));
                         }
                     }
@@ -44,25 +45,24 @@ public class ApplianceDAOImpl implements ApplianceDAO {
         return applianceFound;
     }
 
-    //реализовать через Builder
     public Appliance createAppliance(String applianceInfo, String applianceName) {
         String[] parameters = getApplianceParameters(applianceInfo);
 
         switch (applianceName) {
             case "Oven":
-                return new Oven(parameters[0], parameters[1], parameters[2], parameters[3], parameters[4], parameters[5]);
+                return new OvenBuilder().build(parameters);
             case "Laptop":
-                return new Laptop(parameters[0], parameters[1], parameters[2], parameters[3], parameters[4], parameters[5]);
+                return new LaptopBuilder().build(parameters);
             case "Refrigerator":
-                return new Refrigerator(parameters[0], parameters[1], parameters[2], parameters[3], parameters[4], parameters[5]);
+                return new RefrigeratorBuilder().build(parameters);
             case "VacuumCleaner":
-                return new VacuumCleaner(parameters[0], parameters[1], parameters[2], parameters[3], parameters[4], parameters[5]);
+                return new VacuumCleanerBuilder().build(parameters);
             case "TabletPC":
-                return new TabletPC(parameters[0], parameters[1], parameters[2], parameters[3], parameters[4].trim());
+                return new TabletPCBuilder().build(parameters);
             case "Speakers":
-                return new Speakers(parameters[0], parameters[1], parameters[2], parameters[3]);
+                return new SpeakersBuilder().build(parameters);
             default:
-                return null;
+                throw new RuntimeException("An error occurred while creating the appliance!");
         }
     }
 

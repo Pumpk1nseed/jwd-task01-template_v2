@@ -1,14 +1,20 @@
 package by.tc.task01.entity;
 
-public class Oven extends Appliance {
-    String powerConsumption;
-    String weight;
-    String capacity;
-    String depth;
-    String height;
-    String width;
+import java.util.Objects;
 
-    public Oven(String powerConsumption, String weight, String capacity, String depth, String height, String width) {
+public class Oven implements Appliance {
+    int powerConsumption;
+    int weight;
+    int capacity;
+    int depth;
+    double height;
+    double width;
+
+    public Oven() {
+
+    }
+
+    public Oven(int powerConsumption, int weight, int capacity, int depth, double height, double width) {
         this.powerConsumption = powerConsumption;
         this.weight = weight;
         this.capacity = capacity;
@@ -17,77 +23,33 @@ public class Oven extends Appliance {
         this.width = width;
     }
 
-    @Override
-    public String get(String parameter) {
-        switch (parameter) {
-            case "POWER_CONSUMPTION":
-                return getPowerConsumption();
-            case "WEIGHT":
-                return getWeight();
-            case "CAPACITY":
-                return getCapacity();
-            case "DEPTH":
-                return getDepth();
-            case "HEIGHT":
-                return getHeight();
-            case "WIDTH":
-                return getWidth();
-            default:
-                return null;
-        }
-    }
-
-    public String getPowerConsumption() {
-        return powerConsumption;
-    }
-
-    public void setPowerConsumption(String powerConsumption) {
+    public void setPowerConsumption(int powerConsumption) {
         this.powerConsumption = powerConsumption;
     }
 
-    public String getWeight() {
-        return weight;
-    }
-
-    public void setWeight(String weight) {
+    public void setWeight(int weight) {
         this.weight = weight;
     }
 
-    public String getCapacity() {
-        return capacity;
-    }
-
-    public void setCapacity(String capacity) {
+    public void setCapacity(int capacity) {
         this.capacity = capacity;
     }
 
-    public String getDepth() {
-        return depth;
-    }
-
-    public void setDepth(String depth) {
+    public void setDepth(int depth) {
         this.depth = depth;
     }
 
-    public String getHeight() {
-        return height;
-    }
-
-    public void setHeight(String height) {
+    public void setHeight(double height) {
         this.height = height;
     }
 
-    public String getWidth() {
-        return width;
-    }
-
-    public void setWidth(String width) {
+    public void setWidth(double width) {
         this.width = width;
     }
 
     @Override
     public String toString() {
-        return "Oven{" +
+        return getClass().getSimpleName() + "{" +
                 "powerConsumption='" + powerConsumption + '\'' +
                 ", weight='" + weight + '\'' +
                 ", capacity='" + capacity + '\'' +
@@ -95,5 +57,18 @@ public class Oven extends Appliance {
                 ", height='" + height + '\'' +
                 ", width='" + width + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Oven oven = (Oven) o;
+        return powerConsumption == oven.powerConsumption && weight == oven.weight && capacity == oven.capacity && depth == oven.depth && Double.compare(oven.height, height) == 0 && Double.compare(oven.width, width) == 0;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(powerConsumption, weight, capacity, depth, height, width);
     }
 }
