@@ -2,7 +2,7 @@ package by.tc.task01.entity;
 
 import java.util.Objects;
 
-public class VacuumCleaner extends Appliance {
+public class VacuumCleaner implements Appliance {
     int powerConsumption;
     String filterType;
     String bagType;

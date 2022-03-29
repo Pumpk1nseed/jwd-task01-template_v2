@@ -2,7 +2,7 @@ package by.tc.task01.entity;
 
 import java.util.Objects;
 
-public class Oven extends Appliance {
+public class Oven implements Appliance {
     int powerConsumption;
     int weight;
     int capacity;
