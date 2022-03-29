@@ -2,18 +2,22 @@ package by.tc.task01.dao.impl.Builder;
 
 import by.tc.task01.entity.TabletPC;
 
-public class TabletPCBuilder implements ApplianceBuilder {
+public class TabletPCBuilder extends ApplianceBuilder {
+
+    public TabletPCBuilder(String applianceInfo) {
+        super(applianceInfo);
+    }
 
     @Override
-    public TabletPC build(String[] applianceParameters) {
-        TabletPC tabletPC = new TabletPC();
+    public TabletPC build() {
 
-        tabletPC.setBatteryCapacity(Integer.parseInt(applianceParameters[0]));
-        tabletPC.setDisplayInches(Integer.parseInt(applianceParameters[1]));
-        tabletPC.setMemoryRom(Integer.parseInt(applianceParameters[2]));
-        tabletPC.setFlashMemoryCapacity(Integer.parseInt(applianceParameters[3]));
-        tabletPC.setColor(applianceParameters[4].trim());
+        int batteryCapacity = Integer.parseInt(parameters[0]);
+        int displayInches = Integer.parseInt(parameters[1]);
+        int memoryRom = Integer.parseInt(parameters[2]);
+        int flashMemoryCapacity = Integer.parseInt(parameters[3]);
+        String color = parameters[4].trim();
 
+        TabletPC tabletPC = new TabletPC(batteryCapacity, displayInches, memoryRom, flashMemoryCapacity, color);
         return tabletPC;
     }
 }

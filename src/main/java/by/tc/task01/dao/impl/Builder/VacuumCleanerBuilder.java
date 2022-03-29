@@ -2,19 +2,23 @@ package by.tc.task01.dao.impl.Builder;
 
 import by.tc.task01.entity.VacuumCleaner;
 
-public class VacuumCleanerBuilder implements ApplianceBuilder {
+public class VacuumCleanerBuilder extends ApplianceBuilder {
+
+    public VacuumCleanerBuilder(String applianceInfo) {
+        super(applianceInfo);
+    }
 
     @Override
-    public VacuumCleaner build(String[] applianceParameters) {
-        VacuumCleaner vacuumCleaner = new VacuumCleaner();
+    public VacuumCleaner build() {
 
-        vacuumCleaner.setPowerConsumption(Integer.parseInt(applianceParameters[0]));
-        vacuumCleaner.setFilterType(applianceParameters[1]);
-        vacuumCleaner.setBagType(applianceParameters[2]);
-        vacuumCleaner.setWandType(applianceParameters[3]);
-        vacuumCleaner.setMotorSpeedRegulation(Integer.parseInt(applianceParameters[4]));
-        vacuumCleaner.setCleaningWidth(Integer.parseInt(applianceParameters[5]));
+        int powerConsumption = Integer.parseInt(parameters[0]);
+        String filterType = parameters[1];
+        String bagType = parameters[2];
+        String wandType = parameters[3];
+        int motorSpeedRegulation = Integer.parseInt(parameters[4]);
+        int cleaningWidth = Integer.parseInt(parameters[5]);
 
+        VacuumCleaner vacuumCleaner = new VacuumCleaner(powerConsumption, filterType, bagType, wandType, motorSpeedRegulation, cleaningWidth);
         return vacuumCleaner;
     }
 

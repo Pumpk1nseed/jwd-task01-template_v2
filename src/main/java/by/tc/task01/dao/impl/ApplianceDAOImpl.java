@@ -7,6 +7,7 @@ import by.tc.task01.entity.criteria.Criteria;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.IOException;
 import java.util.*;
 
 //олицетворить переменные
@@ -18,11 +19,11 @@ public class ApplianceDAOImpl implements ApplianceDAO {
         String applianceDbFile = Objects.requireNonNull(getClass().getClassLoader().getResource("appliances_db.txt").getPath());
 
         try {
-            FileReader fileReader = new FileReader(applianceDbFile);
-            Scanner scanner = new Scanner(fileReader);
+            FileReader dbReader = new FileReader(applianceDbFile);
+            Scanner db = new Scanner(dbReader);
 
-            while (scanner.hasNextLine()) {
-                String applianceInfo = scanner.nextLine();
+            while (db.hasNextLine()) {
+                String applianceInfo = db.nextLine();
 
                 if (!applianceInfo.isEmpty()) {
                     if (applianceInfo.split(" :")[0].equals(criteria.getGroupSearchName())) {
@@ -41,47 +42,30 @@ public class ApplianceDAOImpl implements ApplianceDAO {
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
+        } catch (IOException e){
+            e.printStackTrace();
         }
         return applianceFound;
     }
 
     public Appliance createAppliance(String applianceInfo, String applianceName) {
-        String[] parameters = getApplianceParameters(applianceInfo);
 
         switch (applianceName) {
             case "Oven":
-                return new OvenBuilder().build(parameters);
+                return new OvenBuilder(applianceInfo).build();
             case "Laptop":
-                return new LaptopBuilder().build(parameters);
+                return new LaptopBuilder(applianceInfo).build();
             case "Refrigerator":
-                return new RefrigeratorBuilder().build(parameters);
+                return new RefrigeratorBuilder(applianceInfo).build();
             case "VacuumCleaner":
-                return new VacuumCleanerBuilder().build(parameters);
+                return new VacuumCleanerBuilder(applianceInfo).build();
             case "TabletPC":
-                return new TabletPCBuilder().build(parameters);
+                return new TabletPCBuilder(applianceInfo).build();
             case "Speakers":
-                return new SpeakersBuilder().build(parameters);
+                return new SpeakersBuilder(applianceInfo).build();
             default:
-                throw new RuntimeException("An error occurred while creating the appliance!");
+                throw new RuntimeException("No builder found to create an appliance!");
         }
-    }
-
-    public String[] getApplianceParameters(String applianceInfo) {
-        char[] charApplianceInfo = applianceInfo.toCharArray();
-        StringBuilder builder = new StringBuilder();
-
-        for (int i = 0; i < charApplianceInfo.length; i++) {
-            if (charApplianceInfo[i] == '=') {
-                while (charApplianceInfo[i] != ',' && i < charApplianceInfo.length - 1) {
-                    i++;
-                    if (charApplianceInfo[i] != ';') {
-                        builder.append(charApplianceInfo[i]);
-                    }
-                }
-            }
-        }
-        String[] applianceParameters = builder.toString().split(",");
-        return applianceParameters;
     }
 
 }

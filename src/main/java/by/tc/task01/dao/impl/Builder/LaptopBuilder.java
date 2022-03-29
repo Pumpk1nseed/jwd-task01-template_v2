@@ -2,19 +2,23 @@ package by.tc.task01.dao.impl.Builder;
 
 import by.tc.task01.entity.Laptop;
 
-public class LaptopBuilder implements ApplianceBuilder{
+public class LaptopBuilder extends ApplianceBuilder {
+
+    public LaptopBuilder(String applianceInfo) {
+        super(applianceInfo);
+    }
 
     @Override
-    public Laptop build(String[] applianceParameters) {
-        Laptop laptop = new Laptop();
+    public Laptop build() {
 
-        laptop.setBatteryCapacity(Double.parseDouble(applianceParameters[0]));
-        laptop.setOs(applianceParameters[1]);
-        laptop.setMemoryRom(Integer.parseInt(applianceParameters[2]));
-        laptop.setSystemMemory(Integer.parseInt(applianceParameters[3]));
-        laptop.setCpu(Double.parseDouble(applianceParameters[4]));
-        laptop.setDisplayInchs(Integer.parseInt(applianceParameters[5]));
+        double batteryCapacity = Double.parseDouble(parameters[0]);
+        String os = parameters[1];
+        int memoryRom = Integer.parseInt(parameters[2]);
+        int systemMemory = Integer.parseInt(parameters[3]);
+        double cpu = Double.parseDouble(parameters[4]);
+        int displayInchs = Integer.parseInt(parameters[5]);
 
+        Laptop laptop = new Laptop(batteryCapacity, os, memoryRom, systemMemory, cpu, displayInchs);
         return laptop;
     }
 }
