@@ -49,7 +49,6 @@ public class ApplianceDAOImpl implements ApplianceDAO {
     }
 
     public Appliance createAppliance(String applianceInfo, String applianceName) {
-
         switch (applianceName) {
             case "Oven":
                 return new OvenBuilder(applianceInfo).build();
