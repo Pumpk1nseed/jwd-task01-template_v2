@@ -11,14 +11,16 @@ public class OvenBuilder extends ApplianceBuilder {
     @Override
     public Oven build() {
 
-        int powerConsumption = Integer.parseInt(parameters[0]);
-        int weight = Integer.parseInt(parameters[1]);
-        int capacity = Integer.parseInt(parameters[2]);
-        int depth = Integer.parseInt(parameters[3]);
-        double height = Double.parseDouble(parameters[4]);
-        double width = Double.parseDouble(parameters[5]);
+        String manufacturer = parameters[0];
+        int powerConsumption = Integer.parseInt(parameters[1]);
+        int weight = Integer.parseInt(parameters[2]);
+        int capacity = Integer.parseInt(parameters[3]);
+        int depth = Integer.parseInt(parameters[4]);
+        double height = Double.parseDouble(parameters[5]);
+        double width = Double.parseDouble(parameters[6]);
+        double price = Double.parseDouble(parameters[7]);
 
-        Oven oven = new Oven(powerConsumption, weight, capacity, depth, height, width);
+        Oven oven = new Oven(manufacturer, powerConsumption, weight, capacity, depth, height, width, price);
         return oven;
     }
 }

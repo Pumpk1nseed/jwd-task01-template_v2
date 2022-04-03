@@ -25,7 +25,7 @@ public class Main {
 
 		PrintApplianceInfo.print(appliance);
 
-		System.out.println("//////////////////////////////////////////////////////////////////");
+		//////////////////////////////////////////////////////////////////
 
 		criteriaOven = new Criteria(Oven.class.getSimpleName());
 		criteriaOven.add(Oven.HEIGHT.toString(), 45);
@@ -35,7 +35,7 @@ public class Main {
 
 		PrintApplianceInfo.print(appliance);
 
-		System.out.println("//////////////////////////////////////////////////////////////////");
+		//////////////////////////////////////////////////////////////////
 		
 		Criteria criteriaTabletPC = new Criteria(TabletPC.class.getSimpleName());
 		criteriaTabletPC.add(TabletPC.MEMORY_ROM.toString(), 8000);
@@ -45,7 +45,7 @@ public class Main {
 
 		PrintApplianceInfo.print(appliance);
 
-		System.out.println("//////////////////////////////////////////////////////////////////");
+		//////////////////////////////////////////////////////////////////
 
 		Criteria criteriaLaptop = new Criteria(Laptop.class.getSimpleName());
 		criteriaLaptop.add(Laptop.DISPLAY_INCHS.toString(), 18);

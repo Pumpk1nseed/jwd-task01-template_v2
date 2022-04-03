@@ -1,8 +1,9 @@
 package by.tc.task01.entity;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class Oven implements Appliance {
+public class Oven extends Appliance implements Serializable {
     int powerConsumption;
     int weight;
     int capacity;
@@ -14,7 +15,9 @@ public class Oven implements Appliance {
 
     }
 
-    public Oven(int powerConsumption, int weight, int capacity, int depth, double height, double width) {
+    public Oven(String manufacturer, int powerConsumption, int weight, int capacity, int depth,
+                double height, double width, double price) {
+        super(manufacturer, price);
         this.powerConsumption = powerConsumption;
         this.weight = weight;
         this.capacity = capacity;
@@ -47,15 +50,41 @@ public class Oven implements Appliance {
         this.width = width;
     }
 
+    public int getPowerConsumption() {
+        return powerConsumption;
+    }
+
+    public int getWeight() {
+        return weight;
+    }
+
+    public int getCapacity() {
+        return capacity;
+    }
+
+    public int getDepth() {
+        return depth;
+    }
+
+    public double getHeight() {
+        return height;
+    }
+
+    public double getWidth() {
+        return width;
+    }
+
     @Override
     public String toString() {
         return getClass().getSimpleName() + "{" +
-                "powerConsumption='" + powerConsumption + '\'' +
+                "manufacturer='" + getManufacturer() + '\'' +
+                ", powerConsumption='" + powerConsumption + '\'' +
                 ", weight='" + weight + '\'' +
                 ", capacity='" + capacity + '\'' +
                 ", depth='" + depth + '\'' +
                 ", height='" + height + '\'' +
                 ", width='" + width + '\'' +
+                ", price=" + getPrice() +
                 '}';
     }
 

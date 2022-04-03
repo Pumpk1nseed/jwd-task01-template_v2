@@ -1,8 +1,9 @@
 package by.tc.task01.entity;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class Refrigerator implements Appliance {
+public class Refrigerator extends Appliance implements Serializable {
     int powerConsumption;
     int weight;
     int freezerCapacity;
@@ -14,7 +15,9 @@ public class Refrigerator implements Appliance {
 
     }
 
-    public Refrigerator(int powerConsumption, int weight, int freezerCapacity, double overalCapacity, double height, double width) {
+    public Refrigerator(String manufacturer, int powerConsumption, int weight, int freezerCapacity, double overalCapacity,
+                        double height, double width, double price) {
+        super(manufacturer, price);
         this.powerConsumption = powerConsumption;
         this.weight = weight;
         this.freezerCapacity = freezerCapacity;
@@ -47,15 +50,41 @@ public class Refrigerator implements Appliance {
         this.width = width;
     }
 
+    public int getPowerConsumption() {
+        return powerConsumption;
+    }
+
+    public int getWeight() {
+        return weight;
+    }
+
+    public int getFreezerCapacity() {
+        return freezerCapacity;
+    }
+
+    public double getOveralCapacity() {
+        return overalCapacity;
+    }
+
+    public double getHeight() {
+        return height;
+    }
+
+    public double getWidth() {
+        return width;
+    }
+
     @Override
     public String toString() {
         return getClass().getSimpleName() + "{" +
-                "powerConsumption='" + powerConsumption + '\'' +
+                "manufacturer='" + getManufacturer() + '\'' +
+                ", powerConsumption='" + powerConsumption + '\'' +
                 ", weight='" + weight + '\'' +
                 ", freezerCapacity='" + freezerCapacity + '\'' +
                 ", overalCapacity='" + overalCapacity + '\'' +
                 ", height='" + height + '\'' +
                 ", width='" + width + '\'' +
+                ", price=" + getPrice() +
                 '}';
     }
 

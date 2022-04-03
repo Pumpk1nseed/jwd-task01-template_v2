@@ -1,8 +1,9 @@
 package by.tc.task01.entity;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class TabletPC implements Appliance {
+public class TabletPC extends Appliance implements Serializable {
     int batteryCapacity;
     int displayInches;
     int memoryRom;
@@ -13,7 +14,9 @@ public class TabletPC implements Appliance {
 
     }
 
-    public TabletPC(int batteryCapacity, int displayInches, int memoryRom, int flashMemoryCapacity, String color) {
+    public TabletPC(String manufacturer, int batteryCapacity, int displayInches, int memoryRom, int flashMemoryCapacity,
+                    String color,double price) {
+        super(manufacturer, price);
         this.batteryCapacity = batteryCapacity;
         this.displayInches = displayInches;
         this.memoryRom = memoryRom;
@@ -41,14 +44,36 @@ public class TabletPC implements Appliance {
         this.color = color;
     }
 
+    public int getBatteryCapacity() {
+        return batteryCapacity;
+    }
+
+    public int getDisplayInches() {
+        return displayInches;
+    }
+
+    public int getMemoryRom() {
+        return memoryRom;
+    }
+
+    public int getFlashMemoryCapacity() {
+        return flashMemoryCapacity;
+    }
+
+    public String getColor() {
+        return color;
+    }
+
     @Override
     public String toString() {
         return getClass().getSimpleName() + "{" +
-                "batteryCapacity='" + batteryCapacity + '\'' +
+                "manufacturer='" + getManufacturer() + '\'' +
+                ", batteryCapacity='" + batteryCapacity + '\'' +
                 ", displayInches='" + displayInches + '\'' +
                 ", memoryRom='" + memoryRom + '\'' +
                 ", flashMemoryCapacity='" + flashMemoryCapacity + '\'' +
                 ", color='" + color + '\'' +
+                ", price=" + getPrice() +
                 '}';
     }
 

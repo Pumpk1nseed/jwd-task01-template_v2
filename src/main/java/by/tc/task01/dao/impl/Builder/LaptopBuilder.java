@@ -11,14 +11,17 @@ public class LaptopBuilder extends ApplianceBuilder {
     @Override
     public Laptop build() {
 
-        double batteryCapacity = Double.parseDouble(parameters[0]);
-        String os = parameters[1];
-        int memoryRom = Integer.parseInt(parameters[2]);
-        int systemMemory = Integer.parseInt(parameters[3]);
-        double cpu = Double.parseDouble(parameters[4]);
-        int displayInchs = Integer.parseInt(parameters[5]);
+        String manufacturer = parameters[0];
+        double batteryCapacity = Double.parseDouble(parameters[1]);
+        String os = parameters[2];
+        int memoryRom = Integer.parseInt(parameters[3]);
+        int systemMemory = Integer.parseInt(parameters[4]);
+        double cpu = Double.parseDouble(parameters[5]);
+        int displayInchs = Integer.parseInt(parameters[6]);
+        double price = Double.parseDouble(parameters[7]);
 
-        Laptop laptop = new Laptop(batteryCapacity, os, memoryRom, systemMemory, cpu, displayInchs);
+        Laptop laptop = new Laptop(manufacturer, batteryCapacity, os, memoryRom, systemMemory, cpu,
+                displayInchs, price);
         return laptop;
     }
 }

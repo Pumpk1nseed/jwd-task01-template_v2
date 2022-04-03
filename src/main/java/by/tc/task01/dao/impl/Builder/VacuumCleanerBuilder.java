@@ -11,14 +11,17 @@ public class VacuumCleanerBuilder extends ApplianceBuilder {
     @Override
     public VacuumCleaner build() {
 
-        int powerConsumption = Integer.parseInt(parameters[0]);
-        String filterType = parameters[1];
-        String bagType = parameters[2];
-        String wandType = parameters[3];
-        int motorSpeedRegulation = Integer.parseInt(parameters[4]);
-        int cleaningWidth = Integer.parseInt(parameters[5]);
+        String manufacturer = parameters[0];
+        int powerConsumption = Integer.parseInt(parameters[1]);
+        String filterType = parameters[2];
+        String bagType = parameters[3];
+        String wandType = parameters[4];
+        int motorSpeedRegulation = Integer.parseInt(parameters[5]);
+        int cleaningWidth = Integer.parseInt(parameters[6]);
+        double price = Double.parseDouble(parameters[7]);
 
-        VacuumCleaner vacuumCleaner = new VacuumCleaner(powerConsumption, filterType, bagType, wandType, motorSpeedRegulation, cleaningWidth);
+        VacuumCleaner vacuumCleaner = new VacuumCleaner(manufacturer, powerConsumption, filterType, bagType,
+                wandType, motorSpeedRegulation, cleaningWidth, price);
         return vacuumCleaner;
     }
 

@@ -9,20 +9,6 @@ public class Validator {
 
     public static boolean criteriaValidator(Criteria criteria) {
 
-        int numOfCoincidence = 0;
-        for (Class<?> applianceName : SearchCriteria.class.getClasses()) {
-            for (String searchCriteria : criteria.getCriteria().keySet()) {
-                if (applianceName.getSimpleName().equals(criteria.getGroupSearchName())) {
-                    for (Object applianceParameter : applianceName.getEnumConstants()) {
-                        if (searchCriteria.equals(applianceParameter.toString())) {
-                            numOfCoincidence++;
-                        }
-                    }
-                }
-            }
-        }
-        return numOfCoincidence == criteria.getCriteria().size();
+        return criteria.compareWithSearchCriteria();
     }
 }
-
-//you may add your own new classes

@@ -10,7 +10,6 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.*;
 
-//олицетворить переменные
 public class ApplianceDAOImpl implements ApplianceDAO {
 
     @Override
@@ -27,14 +26,7 @@ public class ApplianceDAOImpl implements ApplianceDAO {
 
                 if (!applianceInfo.isEmpty()) {
                     if (applianceInfo.split(" :")[0].equals(criteria.getGroupSearchName())) {
-                        boolean found = true;
-                        for (Map.Entry<String, Object> criteriaParameters : criteria.getCriteria().entrySet()) {
-                            if (!applianceInfo.matches(".+" + criteriaParameters.getKey()
-                                    + "=" + criteriaParameters.getValue().toString() + "(|([,;\\s].*))")) {
-                                found = false;
-                            }
-                        }
-                        if (found) {
+                        if (criteria.findCriteriaInLine(applianceInfo)) {
                             applianceFound.add(createAppliance(applianceInfo, criteria.getGroupSearchName()));
                         }
                     }
@@ -42,7 +34,7 @@ public class ApplianceDAOImpl implements ApplianceDAO {
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
-        } catch (IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
         return applianceFound;

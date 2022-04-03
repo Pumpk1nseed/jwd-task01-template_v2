@@ -11,12 +11,14 @@ public class SpeakersBuilder extends ApplianceBuilder {
     @Override
     public Speakers build() {
 
-        int powerConsumption = Integer.parseInt(parameters[0]);
-        int numberOfSpeakers = Integer.parseInt(parameters[1]);
-        String frequencyRange = parameters[2];
-        int cordLength = Integer.parseInt(parameters[3]);
+        String manufacturer = parameters[0];
+        int powerConsumption = Integer.parseInt(parameters[1]);
+        int numberOfSpeakers = Integer.parseInt(parameters[2]);
+        String frequencyRange = parameters[3];
+        int cordLength = Integer.parseInt(parameters[4]);
+        double price = Double.parseDouble(parameters[5]);
 
-        Speakers speakers = new Speakers(powerConsumption, numberOfSpeakers, frequencyRange, cordLength);
+        Speakers speakers = new Speakers(manufacturer, powerConsumption, numberOfSpeakers, frequencyRange, cordLength, price);
         return speakers;
     }
 }

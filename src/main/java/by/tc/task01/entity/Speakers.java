@@ -1,8 +1,9 @@
 package by.tc.task01.entity;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class Speakers implements Appliance {
+public class Speakers extends Appliance implements Serializable {
     int powerConsumption;
     int numberOfSpeakers;
     String frequencyRange;
@@ -12,7 +13,9 @@ public class Speakers implements Appliance {
 
     }
 
-    public Speakers(int powerConsumption, int numberOfSpeakers, String frequencyRange, int cordLength) {
+    public Speakers(String manufacturer, int powerConsumption, int numberOfSpeakers, String frequencyRange,
+                    int cordLength, double price) {
+        super(manufacturer, price);
         this.powerConsumption = powerConsumption;
         this.numberOfSpeakers = numberOfSpeakers;
         this.frequencyRange = frequencyRange;
@@ -35,13 +38,31 @@ public class Speakers implements Appliance {
         this.cordLength = cordLength;
     }
 
+    public int getPowerConsumption() {
+        return powerConsumption;
+    }
+
+    public int getNumberOfSpeakers() {
+        return numberOfSpeakers;
+    }
+
+    public String getFrequencyRange() {
+        return frequencyRange;
+    }
+
+    public int getCordLength() {
+        return cordLength;
+    }
+
     @Override
     public String toString() {
         return getClass().getSimpleName() + "{" +
-                "powerConsumption='" + powerConsumption + '\'' +
+                "manufacturer='" + getManufacturer() + '\'' +
+                ", powerConsumption='" + powerConsumption + '\'' +
                 ", numberOfSpeakers='" + numberOfSpeakers + '\'' +
                 ", frequencyRange='" + frequencyRange + '\'' +
                 ", cordLength='" + cordLength + '\'' +
+                ", price=" + getPrice() +
                 '}';
     }
 

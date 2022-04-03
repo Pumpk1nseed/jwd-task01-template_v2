@@ -1,8 +1,9 @@
 package by.tc.task01.entity;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class Laptop implements Appliance {
+public class Laptop extends Appliance implements Serializable {
     double batteryCapacity;
     String os;
     int memoryRom;
@@ -13,7 +14,9 @@ public class Laptop implements Appliance {
     public Laptop() {
     }
 
-    public Laptop(double batteryCapacity, String os, int memoryRom, int systemMemory, double cpu, int displayInchs) {
+    public Laptop(String manufacturer, double batteryCapacity, String os, int memoryRom, int systemMemory,
+                  double cpu, int displayInchs, double price) {
+        super(manufacturer, price);
         this.batteryCapacity = batteryCapacity;
         this.os = os;
         this.memoryRom = memoryRom;
@@ -46,15 +49,41 @@ public class Laptop implements Appliance {
         this.displayInchs = displayInchs;
     }
 
+    public double getBatteryCapacity() {
+        return batteryCapacity;
+    }
+
+    public String getOs() {
+        return os;
+    }
+
+    public int getMemoryRom() {
+        return memoryRom;
+    }
+
+    public int getSystemMemory() {
+        return systemMemory;
+    }
+
+    public double getCpu() {
+        return cpu;
+    }
+
+    public int getDisplayInchs() {
+        return displayInchs;
+    }
+
     @Override
     public String toString() {
         return getClass().getSimpleName() + "{" +
-                "batteryCapacity='" + batteryCapacity + '\'' +
+                "manufacturer='" + getManufacturer() + '\'' +
+                ", batteryCapacity='" + batteryCapacity + '\'' +
                 ", os='" + os + '\'' +
                 ", memoryRom='" + memoryRom + '\'' +
                 ", systemMemory='" + systemMemory + '\'' +
                 ", cpu='" + cpu + '\'' +
                 ", displayInchs='" + displayInchs + '\'' +
+                ", price=" + getPrice() +
                 '}';
     }
 

@@ -11,14 +11,17 @@ public class RefrigeratorBuilder extends ApplianceBuilder {
     @Override
     public Refrigerator build() {
 
-        int powerConsumption = Integer.parseInt(parameters[0]);
-        int weight = Integer.parseInt(parameters[1]);
-        int freezerCapacity = Integer.parseInt(parameters[2]);
-        double overalCapacity = Double.parseDouble(parameters[3]);
-        double height = Double.parseDouble(parameters[4]);
-        double width = Double.parseDouble(parameters[5]);
+        String manufacturer = parameters[0];
+        int powerConsumption = Integer.parseInt(parameters[1]);
+        int weight = Integer.parseInt(parameters[2]);
+        int freezerCapacity = Integer.parseInt(parameters[3]);
+        double overalCapacity = Double.parseDouble(parameters[4]);
+        double height = Double.parseDouble(parameters[5]);
+        double width = Double.parseDouble(parameters[6]);
+        double price = Double.parseDouble(parameters[7]);
 
-        Refrigerator refrigerator = new Refrigerator(powerConsumption, weight, freezerCapacity, overalCapacity, height, width);
+        Refrigerator refrigerator = new Refrigerator(manufacturer, powerConsumption, weight, freezerCapacity,
+                overalCapacity, height, width, price);
         return refrigerator;
     }
 }
